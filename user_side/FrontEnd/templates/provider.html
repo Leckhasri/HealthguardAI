@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Provider Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/provider.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Top bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">HealthCare Portal</div>
+        <div class="nav-right">
+          <div class="user-greeting">
+            Welcome, <span id="navProvName">Provider</span>
+          </div>
+          <button class="theme-toggle" id="themeToggle"
+        data-sun="{{ url_for('static', filename='assets/images/sun.png') }}"
+        data-moon="{{ url_for('static', filename='assets/images/brightness.png') }}"
+        aria-label="Toggle theme">
+  <img id="theme-icon"
+       src="{{ url_for('static', filename='assets/images/sun.png') }}"
+       alt="Switch theme" />
+</button>
+
+        </div>
+      </div>
+    </nav>
+
+    <div class="dashboard-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-tabs">
+          <button class="tab-btn active" data-tab="members">
+            <span>👥</span> Patient Details
+          </button>
+          <button class="tab-btn" data-tab="claims">
+            <span>📋</span> Claims History
+          </button>
+        </div>
+
+        <div class="sidebar-profile">
+          <div class="profile-container">
+            <div class="profile-avatar" id="provAvatar">PR</div>
+            <div class="profile-info">
+              <h3 id="provName">Provider</h3>
+              <p class="profile-email" id="provEmail">—</p>
+            </div>
+          </div>
+          <button class="logout-btn" id="logoutBtn">logout</button>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main-content">
+        <!-- Patient Details -->
+        <section id="members-section" class="tab-content active">
+          <div class="section-header">
+            <h2>Patient Details</h2>
+            <p>Patients associated with your provider ID</p>
+          </div>
+          <div class="members-container" id="membersContainer"></div>
+        </section>
+
+        <!-- Claims -->
+        <section id="claims-section" class="tab-content">
+          <div class="section-header">
+            <h2>Claims History</h2>
+            <p>View and track your claims</p>
+          </div>
+
+          <div class="claims-filters">
+            <select class="filter-select" id="statusFilter">
+              <option value="">All Status</option>
+              <option value="Pending">Pending</option>
+              <option value="Processing">Processing</option>
+              <option value="Approved">Approved</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+            <select class="filter-select" id="typeFilter">
+              <option value="">All Types</option>
+              <option value="inpatient">Inpatient</option>
+              <option value="outpatient">Outpatient</option>
+              <option value="emergency">Emergency</option>
+              <option value="prescription">Prescription</option>
+            </select>
+          </div>
+
+          <div class="claims-container" id="claimsContainer"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/provider.js') }}"></script>
+  </body>
+</html>
